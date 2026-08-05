@@ -1,0 +1,5 @@
+name = "payment-portal"
+main = "src/index.js"
+compatibility_date = "2026-08-06"
+account_id = "62eb5e7ecfdb6ce18b036b27aa79e0f5"
+zone_id = "57f6bcac78e58dee8e2adcac3c13f46d"
