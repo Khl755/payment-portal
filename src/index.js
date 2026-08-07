@@ -2,7 +2,7 @@ export default {
   async fetch(request, env) {
     const cors = {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type"
     };
 
@@ -11,7 +11,7 @@ export default {
     }
 
     if (request.method === "GET") {
-      const payoneerEmail = env.PAYONEER_EMAIL || "khlmehsharmin@gmail.com";
+      const payoneerEmail = env.PAYONEER_EMAIL || "not-configured@example.com";
 
       return new Response(`<!DOCTYPE html>
 <html lang="en">
@@ -20,20 +20,42 @@ export default {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Portal | Digital Data Lab</title>
   <style>
-    * {box-sizing:border-box;margin:0;padding:0}
-    body{font-family:system-ui,-apple-system,sans-serif;background:#f8fafc;color:#1e293b;line-height:1.6;padding:20px}
-    .container{max-width:640px;margin:0 auto;background:white;border-radius:16px;padding:36px;box-shadow:0 4px 20px rgba(0,0,0,0.07)}
-    .badge{display:inline-block;background:#dcfce7;color:#166534;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:16px}
-    h1{color:#0f172a;font-size:26px;margin-bottom:8px}
-    .sub{color:#64748b;margin-bottom:28px;font-size:15px}
-    .pay-box{background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:24px;margin-bottom:24px}
-    .pay-box strong{display:block;font-size:15px;color:#0f172a;margin-bottom:6px}
-    .pay-email{font-size:20px;font-weight:700;color:#2563eb;word-break:break-all}
-    .pay-note{font-size:13px;color:#64748b;margin-top:8px}
-    .steps{margin-bottom:28px}
-    .steps h2{font-size:18px;margin-bottom:12px;color:#0f172a}
-    .steps ol{padding-left:20px}
-    .steps li{margin:8px 0;font-size:15px}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; padding: 20px; line-height: 1.6; }
+    .container { max-width: 640px; margin: 0 auto; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .badge { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 20px; font-size: 14px; margin-bottom: 20px; }
+    h1 { color: #0f172a; font-size: 26px; margin-bottom: 8px; }
+    .sub { color: #64748b; margin-bottom: 28px; }
+    .pay-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+    .pay-box strong { display: block; font-size: 15px; color: #0369a1; margin-bottom: 6px; }
+    .pay-box span { font-size: 14px; color: #1e293b; word-break: break-all; }
+    .status { margin-top: 20px; padding: 12px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; color: #166534; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">✅ Service Online</span>
+    <h1>Payment Portal</h1>
+    <p class="sub">Payoneer Withdrawal Service</p>
+    
+    <div class="pay-box">
+      <strong>Payoneer Email</strong>
+      <span>${payoneerEmail}</span>
+    </div>
+
+    <div class="status">
+      ✅ Worker deployed successfully via GitHub Actions + Cloudflare Workers
+    </div>
+  </div>
+</body>
+</html>`, {
+        headers: { ...cors, "Content-Type": "text/html;charset=utf-8" }
+      });
+    }
+
+    return new Response("Method Not Allowed", { status: 405 });
+  }
+};
     .currencies{display:flex;gap:8px;margin-top:12px}
     .currency{background:#f1f5f9;border:1px solid #e2e8f0;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:600}
     form{display:grid;gap:14px;margin-top:24px}
